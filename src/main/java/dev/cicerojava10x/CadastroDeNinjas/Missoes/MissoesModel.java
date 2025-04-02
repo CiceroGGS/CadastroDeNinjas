@@ -22,7 +22,9 @@ public class MissoesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nomeDaMissao;
+
     private String dificuldade;
 
     @OneToMany(mappedBy = "missoes")
