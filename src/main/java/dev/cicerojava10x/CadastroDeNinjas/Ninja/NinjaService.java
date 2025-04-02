@@ -27,4 +27,5 @@ public class NinjaService {
         return ninjaRepository.save(ninja);
     }
 
+
 }
