@@ -1,5 +1,6 @@
 package dev.cicerojava10x.CadastroDeNinjas.Ninja;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.cicerojava10x.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.*;
 //import lombok.*;
@@ -17,49 +18,41 @@ public class NinjaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @Column (name = "id")
+    private Long id;
 
-    @Column(name = "nome")
+    @Column (name = "nome")
     private String nome;
 
-    @Column(unique = true, name = "email")
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "idade")
-    private int idade;
-
-    @Column(name = "img_url")
+    @Column (name = "img_url")
     private String imgUrl;
 
-    @ManyToOne
+    @Column (name = "rank")
+    private String rank;
+
+    @Column (name = "idade")
+    private int idade;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "missoes_id")
+    @JsonIgnoreProperties({"ninjas", "hibernateLazyInitializer", "handler"})
     private MissoesModel missoes;
 
     /******************************************/
 
-    public NinjaModel() {}
+    public NinjaModel() {
 
-    public NinjaModel(String nome, String email, int idade) {
-        this.nome = nome;
-        this.email = email;
-        this.idade = idade;
     }
 
-    public NinjaModel(long id, String nome, String email, int idade, MissoesModel missoes) {
-        this.id = id;
+    public NinjaModel(String nome, String email, String imgUrl, String rank, int idade, MissoesModel missoes) {
         this.nome = nome;
         this.email = email;
-        this.idade = idade;
-        this.missoes = missoes;
-    }
-
-    public NinjaModel(long id, String nome, String email, int idade, String imgUrl, MissoesModel missoes) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.idade = idade;
         this.imgUrl = imgUrl;
+        this.rank = rank;
+        this.idade = idade;
         this.missoes = missoes;
     }
 
@@ -81,6 +74,22 @@ public class NinjaModel {
         this.email = email;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
     public int getIdade() {
         return idade;
     }
@@ -97,12 +106,13 @@ public class NinjaModel {
         this.missoes = missoes;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public Long getId() {
+        return id;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setId(Long id) {
+        this.id = id;
     }
-/******************************************/
+
+    /******************************************/
 }
