@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 //import lombok.Getter;
 //import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,6 +28,7 @@ public class MissoesModel {
 
     private String dificuldade;
 
+    //@OneToMany - Uma missao pode ter varios ninjas
     @OneToMany(mappedBy = "missoes")
     @JsonIgnore
     private List<NinjaModel> ninjas;
@@ -38,6 +38,13 @@ public class MissoesModel {
     }
 
     public MissoesModel(String nome, String dificuldade, List<NinjaModel> ninjas) {
+        this.nome = nome;
+        this.dificuldade = dificuldade;
+        this.ninjas = ninjas;
+    }
+
+    public MissoesModel(Long id, String nome, String dificuldade, List<NinjaModel> ninjas) {
+        this.id = id;
         this.nome = nome;
         this.dificuldade = dificuldade;
         this.ninjas = ninjas;

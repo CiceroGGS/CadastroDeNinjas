@@ -2,6 +2,7 @@ package dev.cicerojava10x.CadastroDeNinjas.Ninja;
 
 import dev.cicerojava10x.CadastroDeNinjas.Missoes.MissoesModel;
 
+
 public class NinjaDTO {
 
     private Long id;

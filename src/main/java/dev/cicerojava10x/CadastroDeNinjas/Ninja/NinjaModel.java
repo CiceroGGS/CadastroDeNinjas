@@ -36,9 +36,8 @@ public class NinjaModel {
     @Column (name = "idade")
     private int idade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "missoes_id")
-    @JsonIgnoreProperties({"ninjas", "hibernateLazyInitializer", "handler"})
     private MissoesModel missoes;
 
     /******************************************/
