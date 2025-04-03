@@ -1,52 +1,25 @@
 package dev.cicerojava10x.CadastroDeNinjas.Ninja;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.cicerojava10x.CadastroDeNinjas.Missoes.MissoesModel;
-import jakarta.persistence.*;
-//import lombok.*;
 
-@Entity
-@Table(name = "tb_ninja")
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Data
-//@Getter
-//@Setter
-public class NinjaModel {
 
-    /******************************************/
+public class NinjaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
     private Long id;
-
-    @Column (name = "nome")
     private String nome;
-
-    @Column(unique = true)
     private String email;
-
-    @Column (name = "img_url")
     private String imgUrl;
-
-    @Column (name = "rank")
     private String rank;
-
-    @Column (name = "idade")
     private int idade;
-
-    @ManyToOne()
-    @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
 
     /******************************************/
 
-    public NinjaModel() {
+    public NinjaDTO() {
 
     }
 
-    public NinjaModel(String nome, String email, String imgUrl, String rank, int idade, MissoesModel missoes) {
+    public NinjaDTO(String nome, String email, String imgUrl, String rank, int idade, MissoesModel missoes) {
         this.nome = nome;
         this.email = email;
         this.imgUrl = imgUrl;
@@ -114,4 +87,5 @@ public class NinjaModel {
     }
 
     /******************************************/
+
 }

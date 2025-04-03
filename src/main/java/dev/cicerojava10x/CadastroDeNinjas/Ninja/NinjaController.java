@@ -1,6 +1,7 @@
 package dev.cicerojava10x.CadastroDeNinjas.Ninja;
 
 import dev.cicerojava10x.CadastroDeNinjas.Missoes.MissoesModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,44 +17,52 @@ public class NinjaController {
         this.ninjaService = ninjaService;
     }
 
+    /********************************************/
     // CREATE
     @PostMapping("/criar")
-    public NinjaModel criarNinja(@RequestBody Map<String, Object> request) {
-        NinjaModel ninja = new NinjaModel();
-        ninja.setNome((String) request.get("nome"));
-        ninja.setEmail((String) request.get("email"));
-        ninja.setIdade(((Number) request.get("idade")).intValue());
-        ninja.setImgUrl((String) request.get("img_url"));
-        ninja.setRank((String) request.get("rank"));
+    public NinjaDTO criarNinja(@RequestBody Map<String, Object> request) {
+
+          NinjaDTO ninjaDTO = new NinjaDTO();
+
+          ninjaDTO.setNome((String) request.get("nome"));
+          ninjaDTO.setEmail((String) request.get("email"));
+          ninjaDTO.setIdade(((Number) request.get("idade")).intValue());
+          ninjaDTO.setImgUrl((String) request.get("img_url"));
+          ninjaDTO.setRank((String) request.get("rank"));
 
         if (request.containsKey("missoes_id")) {
             Long missaoId = ((Number) request.get("missoes_id")).longValue();
             MissoesModel missao = new MissoesModel();
             missao.setId(missaoId);
-            ninja.setMissoes(missao);
+            ninjaDTO.setMissoes(missao);
         }
 
-        return ninjaService.criarNinja(ninja);
+        return ninjaService.criarNinja(ninjaDTO);
     }
 
+    /********************************************/
     // READ
     @GetMapping("/listar")
-    public List<NinjaModel> listarNinjas(){
-        return ninjaService.listarNinjas();
+    public List<NinjaDTO>  listarNinjas() {
+        List<NinjaDTO> ninjas =  ninjaService.listarNinjas();
+        return ninjas;
     }
 
+    /********************************************/
     // READ
     @GetMapping("/listar/{id}")
-    public NinjaModel listarNinjasPorId(@PathVariable Long id){
+    public NinjaDTO listarNinjasPorId(@PathVariable Long id){
         return ninjaService.listarNinjasPorId(id);
     }
 
+    /********************************************/
     // UPDATE
-    @PatchMapping("atualizar/{id}")
-    public NinjaModel atualizarNinja(@PathVariable Long id, @RequestBody NinjaModel ninjaAtualizado) {
-        return ninjaService.atualizarNinja(id, ninjaAtualizado);
+    @PatchMapping("/atualizar/{id}")
+    public NinjaDTO atualizarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninjaDTO) {
+        return ninjaService.atualizarNinja(id, ninjaDTO);
     }
 
+    /********************************************/
     // DELETE
     @DeleteMapping("/deletar/{id}")
     public void deletarNinjaPorId(@PathVariable Long id){
