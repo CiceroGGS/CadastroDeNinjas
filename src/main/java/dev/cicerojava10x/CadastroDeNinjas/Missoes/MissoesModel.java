@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_missoes")
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -29,6 +30,16 @@ public class MissoesModel {
     @OneToMany(mappedBy = "missoes")
     @JsonIgnore
     private List<NinjaModel> ninjas;
+
+    /******************************************/
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     /******************************************/
 
