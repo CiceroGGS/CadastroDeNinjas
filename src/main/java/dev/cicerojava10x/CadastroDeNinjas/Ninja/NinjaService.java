@@ -19,7 +19,6 @@ public class NinjaService {
 
     /********************************************/
 
-
     public List<NinjaDTO> listarNinjas() {
         List<NinjaModel> ninjas = ninjaRepository.findAll();
         return ninjas.stream()

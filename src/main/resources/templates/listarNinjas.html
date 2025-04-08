@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/stylesListarNinjas.css}" rel="stylesheet">
+    <title>Tabela de Ninjas</title>
+</head>
+<body>
+<h1>Lista de Ninjas</h1>
+
+<div th:each="ninja : ${ninjas}">
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Rank</th>
+                <th>Email</th>
+                <th>Missões</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ninja : ${ninja}">
+                <td th:text="${ninja.id}"></td>
+                <td th:text="${ninja.nome}"></td>
+                <td th:text="${ninja.idade}"></td>
+                <td th:text="${ninja.rank}"></td>
+                <td th:text="${ninja.email}"></td>
+                <td>
+                    <span th:if="${ninja.missoes}">Missão: <strong th:text="${ninja.missoes.nome}"></strong>, Dificuldade: <strong th:text="${ninja.missoes.dificuldade}"></strong></span>
+                    <span class="no-mission" th:if="${ninja.missoes == null}">Sem missões cadastradas</span>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-details" th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Detalhes</a>
+                        <a class="btn btn-edit" th:href="@{/ninjas/ui/#/{id}(id=${ninja.id})}">Editar</a>
+                        <a class="btn btn-delete" th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+</body>
+</html>
